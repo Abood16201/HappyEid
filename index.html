@@ -10,7 +10,7 @@
   <!-- تضمين Font Awesome للحصول على أيقونات مواقع التواصل -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    /* إعادة تعيين الهوامش والحشو لجميع العناصر وتطبيق الخط الجديد */
+    /* إعدادات عامة وتصميم متجاوب */
     * {
       box-sizing: border-box;
       font-family: 'IBM Plex Sans Arabic', sans-serif;
@@ -24,16 +24,14 @@
       line-height: 1.6;
       width: 100%;
       overflow-x: hidden;
-      height: 100%;
-      margin: 0;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
     }
     .main-content {
       flex: 1;
     }
-    /* تصميم الهيدر بنفس حجم الحاويات وبحواف منحنية وتأثير الظل */
-    header {
+    header, .container, .social, footer, .disclaimer, .disclaimer-toggle {
       width: 90%;
       max-width: 1200px;
       margin: 20px auto;
@@ -52,11 +50,8 @@
       from { transform: translateY(-30px); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
     }
-    /* رسالة ترحيب */
     .welcome {
-      text-align: center;
       font-size: 1.5em;
-      color: #e0e0e0;
       margin-bottom: 20px;
       animation: pulse 2s infinite ease-in-out;
     }
@@ -65,150 +60,40 @@
       50% { transform: scale(1.05); opacity: 0.8; }
       100% { transform: scale(1); opacity: 1; }
     }
-    /* الحاوية الرئيسية */
-    .container {
-      width: 90%;
-      max-width: 1200px;
-      margin: 0 auto 30px;
-      background-color: #1e1e1e;
-      padding: 25px;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.4);
-      color: #e0e0e0;
-    }
-    form {
+    form, input, select, button {
       width: 100%;
+      margin-bottom: 20px;
     }
-    label {
-      font-size: 1.2em;
-      margin-bottom: 8px;
-      display: block;
-      color: #e0e0e0;
-    }
-    /* الحقول */
     input, select, textarea {
-      width: 100%;
       padding: 12px;
-      font-size: 1em;
-      margin-bottom: 20px;
-      border-radius: 5px;
       border: 1px solid #444;
-      background-color: #1e1e1e;
-      color: #e0e0e0;
-    }
-    /* الأزرار */
-    button {
-      width: 100%;
-      padding: 12px;
-      font-size: 1em;
-      margin-bottom: 20px;
       border-radius: 5px;
-      border: none;
-      color: #e0e0e0;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      display: block;
-    }
-    /* زر التخمين */
-    #guessBtn {
-      background-color: #333333;
-    }
-    #guessBtn:hover {
-      background-color: #444444;
-    }
-    /* زر إعادة التخمين بنفس لون زر التخمين */
-    #resetBtn {
-      margin-top: 20px;
-      background-color: #333333;
-      color: #e0e0e0;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      display: block;
-      border: none;
-      border-radius: 5px;
-      padding: 12px;
-    }
-    #resetBtn:hover {
-      background-color: #444444;
-    }
-    .result {
-      text-align: center;
-      font-size: 1.4em;
-      margin-top: 10px;
-      color: #e0e0e0;
-      animation: popIn 0.5s ease;
-    }
-    @keyframes popIn {
-      from { transform: scale(0.8); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-    /* مربع رمز القبيلة */
-    .tribe-code {
-      text-align: center;
-      font-size: 1.2em;
-      margin-top: 15px;
-      color: #e0e0e0;
-    }
-    .coming-soon {
-      text-align: center;
-      font-size: 0.9em;
-      color: #e0e0e0;
-      margin-top: -10px;
-      margin-bottom: 20px;
-    }
-    /* قسم مواقع التواصل */
-    .social {
-      text-align: center;
-      margin: 20px auto;
-      width: 90%;
-      max-width: 1200px;
-      background-color: #1e1e1e;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.4);
-      color: #e0e0e0;
-    }
-    .social p {
-      margin-bottom: 10px;
-      font-size: 1.1em;
-    }
-    .social a {
-      margin: 0 10px;
-      font-size: 2em;
-      color: #e0e0e0;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-    .social a:hover {
-      color: #bbbbbb;
-    }
-    /* تصميم الفوتر بنفس حجم الحاويات وبحواف منحنية وتأثير الظل */
-    footer {
-      width: 90%;
-      max-width: 1200px;
-      margin: 20px auto;
       background-color: #1f1f1f;
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.4);
-      font-size: 0.9em;
       color: #e0e0e0;
-      text-align: center;
     }
-    footer p {
-      margin: 5px 0;
+    button {
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      background-color: #333333;
+      color: #e0e0e0;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #444444;
+    }
+    .result, .tribe-code {
+      margin-top: 10px;
     }
     footer a {
       color: #e0e0e0;
       text-decoration: underline;
       margin: 0 5px;
-      display: inline-block;
-      transition: color 0.3s ease;
     }
     footer a:hover {
       color: #bbbbbb;
     }
-    /* قسم عدد الزوار مع أيقونة العين */
     #visitorCounter {
       margin-top: 10px;
       display: inline-block;
@@ -216,45 +101,6 @@
     }
     #visitorCounter i {
       margin-left: 5px;
-    }
-    /* خانة إخلاء المسؤولية */
-    .disclaimer-toggle {
-      width: 90%;
-      max-width: 1200px;
-      margin: 20px auto;
-      padding: 10px;
-      text-align: center;
-      background-color: #1e1e1e;
-      color: #B8860B;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    .disclaimer-toggle:hover {
-      background-color: #333333;
-    }
-    .disclaimer {
-      width: 90%;
-      max-width: 1200px;
-      margin: 10px auto 30px;
-      padding: 20px;
-      background-color: #1e1e1e;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.4);
-      color: #e0e0e0;
-      font-size: 0.95em;
-      line-height: 1.8;
-      display: none;
-    }
-    .disclaimer h2 {
-      color: #B8860B;
-      margin-bottom: 15px;
-      text-align: center;
-      font-size: 1.8em;
-    }
-    .disclaimer p {
-      margin-bottom: 15px;
-      text-align: justify;
     }
   </style>
 </head>
@@ -264,10 +110,10 @@
       <h1>مخمن القبائل اليمنية</h1>
     </header>
     
-    <!-- رسالة ترحيب -->
     <div class="welcome">مرحبا مليوووووون يالامير 🔥</div>
     
     <div class="container">
+      <!-- نموذج التخمين -->
       <form id="tribeForm">
         <label for="fullName">اكتب اسمك الثنائي (دون اسم العائلة):</label>
         <input type="text" id="fullName" name="fullName" placeholder="مثلاً: أحمد علي" required>
@@ -279,18 +125,15 @@
           <option value="محافظة حضرموت">محافظة حضرموت</option>
           <option value="محافظة مأرب">محافظة مأرب</option>
         </select>
-        <div class="coming-soon">قريباً لكافة المحافظات</div>
+        <div>قريباً لكافة المحافظات</div>
         <button type="submit" id="guessBtn">تخمين القبيلة</button>
       </form>
-      <!-- عرض النتيجة -->
+      
       <div class="result" id="result"></div>
-      <!-- عرض رمز القبيلة في حالة محافظة شبوة -->
       <div class="tribe-code" id="tribeCode"></div>
-      <!-- زر إعادة التخمين -->
       <button id="resetBtn" style="display: none;">تخمين جديد</button>
     </div>
     
-    <!-- قسم مواقع التواصل -->
     <div class="social">
       <p>تابعنا على:</p>
       <a href="#" target="_blank" title="تيك توك"><i class="fab fa-tiktok"></i></a>
@@ -298,15 +141,14 @@
       <a href="#" target="_blank" title="تيلجرام"><i class="fab fa-telegram"></i></a>
     </div>
     
-    <!-- خانة إخلاء المسؤولية -->
     <div class="disclaimer-toggle" id="disclaimerToggle">إخلاء مسؤولية</div>
-    <div class="disclaimer" id="disclaimerContent">
+    <div class="disclaimer" id="disclaimerContent" style="display: none;">
       <h2>إخلاء مسؤولية</h2>
       <p>
         يهدف هذا الموقع إلى تقديم تجربة ترفيهية خفيفة تقوم على التخمين العشوائي لأسماء القبائل اليمنية بناءً على الاسم الثنائي والمحافظة المختارة، ولا يعتمد على أي بيانات حقيقية أو أسس علمية أو اجتماعية دقيقة في تحديد الانتماء القبلي.
       </p>
       <p>
-        نحن في إدارة الموقع نؤكد أن استخدام هذه الخدمة لا يمثل بأي شكل من الأشكال إثباتًا فعليًا أو رسميًا للهوية القبلية لأي شخص، ونخلي مسؤوليتنا الكاملة تجاه أي استخدام خاطئ أو مسيء للمحتوى أو النتائج الظاهرة من خلاله.
+        نحن في إدارة الموقع نؤكد أن استخدام هذه الخدمة لا يمثل بأي شكل من الأشكال إثباتًا فعليًا أو رسميًا للهوية القبلية لأي شخص، ونخلي مسؤوليتنا الكاملة تجاه أي استخدام خاطئ أو مسيء للمحتوى أو النتائج الظاهرة.
       </p>
       <p>
         كما نرفض تمامًا وبشكل قاطع استغلال الموقع لإثارة النعرات القبلية أو العنصرية أو أي سلوك يخل بروح الاحترام والتعايش بين أبناء المجتمع اليمني، ونؤكد أن من يقوم بذلك يتحمل المسؤولية القانونية والأخلاقية الكاملة عن تصرفاته.
@@ -324,16 +166,46 @@
     <span id="visitorCounter"><i class="fas fa-eye"></i> <span id="visitorCount">0</span> زوار</span>
   </footer>
   
+  <!-- استخدام Firebase عبر ES6 Modules -->
+  <script type="module">
+    // استيراد الوحدات اللازمة من Firebase
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+    import { getDatabase, ref, transaction } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js";
+  
+    // إعدادات Firebase (استبدل القيم بالمعلومات التي حصلت عليها من Firebase Console)
+    const firebaseConfig = {
+      apiKey: "AIzaSyBeJZ-q4H_g67aulicW5svETSvjY7mcdeU",
+      authDomain: "tixt-13e44.firebaseapp.com",
+      databaseURL: "https://tixt-13e44-default-rtdb.firebaseio.com",
+      projectId: "tixt-13e44",
+      storageBucket: "tixt-13e44.firebasestorage.app",
+      messagingSenderId: "591901735567",
+      appId: "1:591901735567:web:ba0ae20e4c2265813b4efa",
+      measurementId: "G-QYSFX3NKE1"
+    };
+  
+    // تهيئة Firebase
+    const appFirebase = initializeApp(firebaseConfig);
+    const database = getDatabase(appFirebase);
+  
+    // زيادة عداد الزوار باستخدام معاملة (transaction)
+    const counterRef = ref(database, 'visitorCount');
+    transaction(counterRef, (currentValue) => {
+      return (currentValue || 0) + 1;
+    }).then((result) => {
+      console.log("Visitor count updated:", result.snapshot.val());
+      document.getElementById('visitorCount').textContent = result.snapshot.val();
+    }).catch((error) => {
+      console.error("Transaction failed:", error);
+    });
+  </script>
+  
   <script>
-    // تفعيل خاصية تبديل إظهار/إخفاء إخلاء المسؤولية
+    // تفعيل تبديل إظهار/إخفاء إخلاء المسؤولية
     const disclaimerToggle = document.getElementById("disclaimerToggle");
     const disclaimerContent = document.getElementById("disclaimerContent");
     disclaimerToggle.addEventListener("click", function() {
-      if (disclaimerContent.style.display === "none" || disclaimerContent.style.display === "") {
-        disclaimerContent.style.display = "block";
-      } else {
-        disclaimerContent.style.display = "none";
-      }
+      disclaimerContent.style.display = (disclaimerContent.style.display === "none" || disclaimerContent.style.display === "") ? "block" : "none";
     });
   
     // كود مشاركة الموقع باستخدام Web Share API
@@ -353,22 +225,7 @@
       }
     });
   
-    // إنشاء الـ namespace (يُنفذ مرة واحدة فقط)
-    fetch('https://api.countapi.xyz/create?namespace=aboodhappyEid&key=visits&value=0')
-      .then(response => response.json())
-      .then(data => console.log("Namespace created:", data))
-      .catch(error => console.error("Namespace creation error (يمكن تجاهلها إذا كانت موجودة مسبقاً):", error));
-  
-    // تحديث عدد الزوار باستخدام CountAPI مع معامل عشوائي لمنع الكاش
-    fetch(`https://api.countapi.xyz/hit/aboodhappyEid/visits?rand=${Date.now()}`)
-      .then(response => response.json())
-      .then(data => {
-        console.log("CountAPI response:", data);
-        document.getElementById('visitorCount').textContent = data.value;
-      })
-      .catch(error => console.error("خطأ في تحديث عدد الزوار:", error));
-  
-    // بيانات القبائل لكل محافظة
+    // (بقية كود الموقع للتخمين وإدارة النموذج)
     const tribes = {
       "محافظة شبوة": [
         "لقموش",
@@ -406,7 +263,6 @@
       ]
     };
   
-    // خريطة رموز قبائل محافظة شبوة مع إضافة رمز قبيلة "سعد الظالمة" (712)
     const tribeCodes = {
       "لقموش": "715",
       "العوالق": "917",
@@ -458,7 +314,7 @@
         const randomIndex = Math.floor(Math.random() * selectedTribes.length);
         const tribe = selectedTribes[randomIndex];
         resultDiv.textContent = "اعتقد بانك تنتمي يا " + fullName + " الى قبيلة " + tribe + " وسبعين نعم يالذيب 🫡🔥.";
-        
+  
         if (governorate === "محافظة شبوة") {
           const code = tribeCodes[tribe];
           tribeCodeDiv.textContent = code ? "رمز قبيلتك هو (" + code + ") 🔥" : "";
