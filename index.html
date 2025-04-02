@@ -233,7 +233,6 @@
     .disclaimer-toggle:hover {
       background-color: #333333;
     }
-    /* النص الكامل لإخلاء المسؤولية */
     .disclaimer {
       width: 90%;
       max-width: 1200px;
@@ -267,7 +266,7 @@
     
     <!-- رسالة ترحيب -->
     <div class="welcome">مرحبا مليوووووون يالامير 🔥</div>
-
+    
     <div class="container">
       <form id="tribeForm">
         <label for="fullName">اكتب اسمك الثنائي (دون اسم العائلة):</label>
@@ -290,7 +289,7 @@
       <!-- زر إعادة التخمين -->
       <button id="resetBtn" style="display: none;">تخمين جديد</button>
     </div>
-
+    
     <!-- قسم مواقع التواصل -->
     <div class="social">
       <p>تابعنا على:</p>
@@ -324,9 +323,9 @@
     <a href="#" id="shareBtn">شارك الموقع</a> |
     <span id="visitorCounter"><i class="fas fa-eye"></i> <span id="visitorCount">0</span> زوار</span>
   </footer>
-
+  
   <script>
-    // تفعيل خاصية التبديل لقسم إخلاء المسؤولية
+    // تفعيل خاصية تبديل إظهار/إخفاء إخلاء المسؤولية
     const disclaimerToggle = document.getElementById("disclaimerToggle");
     const disclaimerContent = document.getElementById("disclaimerContent");
     disclaimerToggle.addEventListener("click", function() {
@@ -336,7 +335,7 @@
         disclaimerContent.style.display = "none";
       }
     });
-
+  
     // كود مشاركة الموقع باستخدام Web Share API
     const shareBtn = document.getElementById("shareBtn");
     shareBtn.addEventListener("click", function(e) {
@@ -353,15 +352,22 @@
         alert("ميزة المشاركة غير مدعومة في هذا المتصفح.");
       }
     });
-
-    // تحديث عدد الزوار باستخدام CountAPI مع namespace جديد ومعامل عشوائي لمنع التخزين المؤقت
-    fetch('https://api.countapi.xyz/hit/aboodhappyEid/visits?rand=' + new Date().getTime())
+  
+    // إنشاء الـ namespace (يُنفذ مرة واحدة فقط)
+    fetch('https://api.countapi.xyz/create?namespace=aboodhappyEid&key=visits&value=0')
+      .then(response => response.json())
+      .then(data => console.log("Namespace created:", data))
+      .catch(error => console.error("Namespace creation error (يمكن تجاهلها إذا كانت موجودة مسبقاً):", error));
+  
+    // تحديث عدد الزوار باستخدام CountAPI مع معامل عشوائي لمنع الكاش
+    fetch(`https://api.countapi.xyz/hit/aboodhappyEid/visits?rand=${Date.now()}`)
       .then(response => response.json())
       .then(data => {
-          document.getElementById('visitorCount').textContent = data.value;
+        console.log("CountAPI response:", data);
+        document.getElementById('visitorCount').textContent = data.value;
       })
       .catch(error => console.error("خطأ في تحديث عدد الزوار:", error));
-
+  
     // بيانات القبائل لكل محافظة
     const tribes = {
       "محافظة شبوة": [
@@ -399,7 +405,7 @@
         "ال موسى"
       ]
     };
-
+  
     // خريطة رموز قبائل محافظة شبوة مع إضافة رمز قبيلة "سعد الظالمة" (712)
     const tribeCodes = {
       "لقموش": "715",
@@ -413,7 +419,7 @@
       "بلعبيد": "717",
       "سعد الظالمة": "712"
     };
-
+  
     const tribeForm = document.getElementById("tribeForm");
     const guessBtn = document.getElementById("guessBtn");
     const resetBtn = document.getElementById("resetBtn");
@@ -421,16 +427,16 @@
     const governorateSelect = document.getElementById("governorate");
     const resultDiv = document.getElementById("result");
     const tribeCodeDiv = document.getElementById("tribeCode");
-
+  
     let guessed = false;
-
+  
     tribeForm.addEventListener("submit", function(e) {
       e.preventDefault();
       if (guessed) return;
-
+  
       const fullName = fullNameInput.value.trim();
       const governorate = governorateSelect.value;
-
+  
       if (fullName === "") {
         resultDiv.textContent = "يرجى إدخال اسمك الثنائي.";
         tribeCodeDiv.textContent = "";
@@ -461,7 +467,7 @@
         resetBtn.style.display = "block";
       }, 3000);
     });
-
+  
     resetBtn.addEventListener("click", function() {
       tribeForm.reset();
       resultDiv.textContent = "";
