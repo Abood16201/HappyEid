@@ -225,7 +225,7 @@
       padding: 10px;
       text-align: center;
       background-color: #1e1e1e;
-      color: #B8860B; /* أصفر غامق */
+      color: #B8860B;
       border-radius: 5px;
       cursor: pointer;
       transition: background-color 0.3s ease;
@@ -345,7 +345,7 @@
         navigator.share({
           title: "موقع تخمين القبائل اليمنية",
           text: "تعرف على موقع تخمين القبائل اليمنية",
-          url: window.location.href // يمكنك تعديل الرابط لاحقاً
+          url: window.location.href
         })
         .then(() => console.log("تمت المشاركة بنجاح"))
         .catch((error) => console.error("خطأ أثناء المشاركة:", error));
@@ -354,8 +354,8 @@
       }
     });
 
-    // تحديث عدد الزوار باستخدام CountAPI
-    fetch('https://api.countapi.xyz/hit/mukhammin-tribes.com/visits')
+    // تحديث عدد الزوار باستخدام CountAPI مع استخدام نطاق موقعك الجديد
+    fetch('https://api.countapi.xyz/hit/abood16201.github.io/HappyEid/visits')
       .then(response => response.json())
       .then(data => {
           document.getElementById('visitorCount').textContent = data.value;
@@ -400,19 +400,19 @@
       ]
     };
 
-    // خريطة رموز قبائل محافظة شبوة
+    // خريطة رموز قبائل محافظة شبوة مع إضافة رمز قبيلة "سعد الظالمة" (712)
     const tribeCodes = {
-  "لقموش": "715",
-  "العوالق": "917",
-  "نعمان": "716",
-  "حمير": "714",
-  "المصعبين": "604",
-  "القراميش": "711",
-  "بلحارث": "501",
-  "بني هلال": "705",
-  "بلعبيد": "717",
-  "سعد الظالمة": "712"
-};
+      "لقموش": "715",
+      "العوالق": "917",
+      "نعمان": "716",
+      "حمير": "714",
+      "المصعبين": "604",
+      "القراميش": "711",
+      "بلحارث": "501",
+      "بني هلال": "705",
+      "بلعبيد": "717",
+      "سعد الظالمة": "712"
+    };
 
     const tribeForm = document.getElementById("tribeForm");
     const guessBtn = document.getElementById("guessBtn");
@@ -422,7 +422,7 @@
     const resultDiv = document.getElementById("result");
     const tribeCodeDiv = document.getElementById("tribeCode");
 
-    let guessed = false; // السماح بتخمين مرة واحدة فقط حتى إعادة التعيين
+    let guessed = false;
 
     tribeForm.addEventListener("submit", function(e) {
       e.preventDefault();
@@ -441,7 +441,6 @@
         tribeCodeDiv.textContent = "";
         return;
       }
-      // إخفاء زر التخمين لمنع التكرار
       guessBtn.style.display = "none";
       fullNameInput.disabled = true;
       governorateSelect.disabled = true;
