@@ -354,8 +354,8 @@
       }
     });
 
-    // تحديث عدد الزوار باستخدام CountAPI مع معامل منع التخزين المؤقت
-    fetch('https://api.countapi.xyz/hit/abood16201.github.io%2FHappyEid/visits?notcached=1')
+    // تحديث عدد الزوار باستخدام CountAPI مع namespace جديد ومعامل عشوائي لمنع التخزين المؤقت
+    fetch('https://api.countapi.xyz/hit/aboodhappyEid/visits?rand=' + new Date().getTime())
       .then(response => response.json())
       .then(data => {
           document.getElementById('visitorCount').textContent = data.value;
