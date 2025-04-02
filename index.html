@@ -2,341 +2,37 @@
 <html lang="ar">
 <head>
   <meta charset="UTF-8">
-  <!-- تعطيل ميزة التكبير والتصغير -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>مخمن القبائل اليمنية</title>
-  <!-- استخدام خط IBM Plex Sans Arabic لجميع العناصر -->
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;700&display=swap" rel="stylesheet">
-  <!-- تضمين Font Awesome للحصول على أيقونات مواقع التواصل -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>السلام عليكم</title>
   <style>
-    /* إعدادات عامة وتصميم متجاوب */
-    * {
-      box-sizing: border-box;
-      font-family: 'IBM Plex Sans Arabic', sans-serif;
+    body {
       margin: 0;
       padding: 0;
-    }
-    html, body {
-      background-color: #121212;
-      color: #e0e0e0;
+      background: linear-gradient(to right, #6dd5fa, #2980b9);
+      font-family: Arial, sans-serif;
       direction: rtl;
-      line-height: 1.6;
-      width: 100%;
-      overflow-x: hidden;
-      min-height: 100vh;
+      height: 100vh;
       display: flex;
-      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
-    .main-content {
-      flex: 1;
-    }
-    /* تصميم الحاويات المشتركة */
-    header, .container, .social, footer, .disclaimer, .disclaimer-toggle {
-      width: 90%;
-      max-width: 1200px;
-      margin: 20px auto;
-      background-color: #1f1f1f;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+    .container {
       text-align: center;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 50px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
-    header h1 {
-      font-size: 2.2em;
-      color: #ffffff;
-      animation: slideDown 1s ease;
-    }
-    @keyframes slideDown {
-      from { transform: translateY(-30px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-    .welcome {
-      font-size: 1.5em;
-      margin-bottom: 20px;
-      animation: pulse 2s infinite ease-in-out;
-    }
-    @keyframes pulse {
-      0% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.05); opacity: 0.8; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-    form, input, select, button {
-      width: 100%;
-      margin-bottom: 20px;
-    }
-    input, select, textarea {
-      padding: 12px;
-      border: 1px solid #444;
-      border-radius: 5px;
-      background-color: #1f1f1f;
-      color: #e0e0e0;
-    }
-    button {
-      padding: 12px;
-      border: none;
-      border-radius: 5px;
-      background-color: #333333;
-      color: #e0e0e0;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    button:hover {
-      background-color: #444444;
-    }
-    .result, .tribe-code {
-      margin-top: 10px;
-    }
-    footer a {
-      color: #e0e0e0;
-      text-decoration: underline;
-      margin: 0 5px;
-    }
-    footer a:hover {
-      color: #bbbbbb;
-    }
-    #visitorCounter {
-      margin-top: 10px;
-      display: inline-block;
-      font-size: 0.9em;
-    }
-    #visitorCounter i {
-      margin-left: 5px;
+    h1 {
+      font-size: 3em;
+      color: #333;
+      margin: 0;
     }
   </style>
 </head>
 <body>
-  <div class="main-content">
-    <header>
-      <h1>مخمن القبائل اليمنية</h1>
-    </header>
-    
-    <div class="welcome">مرحبا مليوووووون يالامير 🔥</div>
-    
-    <div class="container">
-      <!-- نموذج التخمين -->
-      <form id="tribeForm">
-        <label for="fullName">اكتب اسمك الثنائي (دون اسم العائلة):</label>
-        <input type="text" id="fullName" name="fullName" placeholder="مثلاً: أحمد علي" required>
-        
-        <label for="governorate">اختر المحافظة:</label>
-        <select id="governorate" name="governorate" required>
-          <option value="" disabled selected>اختر المحافظة</option>
-          <option value="محافظة شبوة">محافظة شبوة</option>
-          <option value="محافظة حضرموت">محافظة حضرموت</option>
-          <option value="محافظة مأرب">محافظة مأرب</option>
-        </select>
-        <div>قريباً لكافة المحافظات</div>
-        <button type="submit" id="guessBtn">تخمين القبيلة</button>
-      </form>
-      
-      <div class="result" id="result"></div>
-      <div class="tribe-code" id="tribeCode"></div>
-      <button id="resetBtn" style="display: none;">تخمين جديد</button>
-    </div>
-    
-    <div class="social">
-      <p>تابعنا على:</p>
-      <a href="#" target="_blank" title="تيك توك"><i class="fab fa-tiktok"></i></a>
-      <a href="#" target="_blank" title="سناب"><i class="fab fa-snapchat-ghost"></i></a>
-      <a href="#" target="_blank" title="تيلجرام"><i class="fab fa-telegram"></i></a>
-    </div>
-    
-    <div class="disclaimer-toggle" id="disclaimerToggle">إخلاء مسؤولية</div>
-    <div class="disclaimer" id="disclaimerContent" style="display: none;">
-      <h2>إخلاء مسؤولية</h2>
-      <p>
-        يهدف هذا الموقع إلى تقديم تجربة ترفيهية خفيفة تقوم على التخمين العشوائي لأسماء القبائل اليمنية بناءً على الاسم الثنائي والمحافظة المختارة، ولا يعتمد على أي بيانات حقيقية أو أسس علمية أو اجتماعية دقيقة في تحديد الانتماء القبلي.
-      </p>
-      <p>
-        نحن في إدارة الموقع نؤكد أن استخدام هذه الخدمة لا يمثل بأي شكل من الأشكال إثباتًا فعليًا أو رسميًا للهوية القبلية لأي شخص، ونخلي مسؤوليتنا الكاملة تجاه أي استخدام خاطئ أو مسيء للمحتوى أو النتائج الظاهرة.
-      </p>
-      <p>
-        كما نرفض تمامًا وبشكل قاطع استغلال الموقع لإثارة النعرات القبلية أو العنصرية أو أي سلوك يخل بروح الاحترام والتعايش بين أبناء المجتمع اليمني، ونؤكد أن من يقوم بذلك يتحمل المسؤولية القانونية والأخلاقية الكاملة عن تصرفاته.
-      </p>
-      <p>
-        نحن نؤمن بأن القبائل مكون أساسي من الهوية اليمنية، وأن احترام الجميع واجب لا جدال فيه، واستخدام هذا الموقع يجب أن يكون دائمًا في إطار الترفيه المسؤول والمحب للتنوع والانتماء المشترك.
-      </p>
-    </div>
+  <div class="container">
+    <h1>السلام عليكم ورحمة الله وبركاته</h1>
   </div>
-  
-  <footer>
-    <p>&copy; 2025 موقع تخمين القبائل اليمنية</p>
-    <a href="contact.html">اتصل بنا</a> |
-    <a href="#" id="shareBtn">شارك الموقع</a> |
-    <span id="visitorCounter"><i class="fas fa-eye"></i> <span id="visitorCount">0</span> زوار</span>
-  </footer>
-  
-  <!-- Firebase SDK (استخدام ES6 Modules) -->
-  <script type="module">
-    // استيراد الوحدات المطلوبة من Firebase
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
-    import { getDatabase, ref, transaction } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js";
-    
-    // إعدادات Firebase الخاصة بمشروعك (استبدل هذه القيم بالقيم الخاصة بك)
-    const firebaseConfig = {
-      apiKey: "AIzaSyBeJZ-q4H_g67aulicW5svETSvjY7mcdeU",
-      authDomain: "tixt-13e44.firebaseapp.com",
-      databaseURL: "https://tixt-13e44-default-rtdb.firebaseio.com",
-      projectId: "tixt-13e44",
-      storageBucket: "tixt-13e44.firebasestorage.app",
-      messagingSenderId: "591901735567",
-      appId: "1:591901735567:web:ba0ae20e4c2265813b4efa",
-      measurementId: "G-QYSFX3NKE1"
-    };
-    
-    // تهيئة Firebase
-    const appFirebase = initializeApp(firebaseConfig);
-    const database = getDatabase(appFirebase);
-    
-    // زيادة عداد الزوار باستخدام معاملة (transaction)
-    const counterRef = ref(database, 'visitorCount');
-    transaction(counterRef, (currentValue) => {
-      console.log("القيمة الحالية:", currentValue);
-      return (currentValue || 0) + 1;
-    }).then((result) => {
-      console.log("تم تحديث العداد:", result.snapshot.val());
-      document.getElementById('visitorCount').textContent = result.snapshot.val();
-    }).catch((error) => {
-      console.error("Transaction failed:", error);
-    });
-  </script>
-  
-  <script>
-    // تفعيل تبديل إظهار/إخفاء إخلاء المسؤولية
-    const disclaimerToggle = document.getElementById("disclaimerToggle");
-    const disclaimerContent = document.getElementById("disclaimerContent");
-    disclaimerToggle.addEventListener("click", function() {
-      disclaimerContent.style.display = (disclaimerContent.style.display === "none" || disclaimerContent.style.display === "") ? "block" : "none";
-    });
-  
-    // كود مشاركة الموقع باستخدام Web Share API
-    const shareBtn = document.getElementById("shareBtn");
-    shareBtn.addEventListener("click", function(e) {
-      e.preventDefault();
-      if (navigator.share) {
-        navigator.share({
-          title: "موقع تخمين القبائل اليمنية",
-          text: "تعرف على موقع تخمين القبائل اليمنية",
-          url: window.location.href
-        })
-        .then(() => console.log("تمت المشاركة بنجاح"))
-        .catch((error) => console.error("خطأ أثناء المشاركة:", error));
-      } else {
-        alert("ميزة المشاركة غير مدعومة في هذا المتصفح.");
-      }
-    });
-  
-    // بيانات القبائل
-    const tribes = {
-      "محافظة شبوة": [
-        "لقموش",
-        "العوالق",
-        "بني هلال",
-        "بلحارث",
-        "المصعبين",
-        "نعمان",
-        "حمير",
-        "القراميش",
-        "سعد الظالمة"
-      ],
-      "محافظة حضرموت": [
-        "نهد",
-        "الصيعر",
-        "ال كثير",
-        "سيبان",
-        "نوح",
-        "الحموم",
-        "بلعبيد",
-        "الدين",
-        "ال جوابر",
-        "ال مره",
-        "العوامر"
-      ],
-      "محافظة مأرب": [
-        "عبيده",
-        "مراد",
-        "الاشراف",
-        "الجدعان",
-        "جهم",
-        "ال عقيل",
-        "ال طهيف",
-        "ال موسى"
-      ]
-    };
-  
-    // خريطة رموز القبائل لمحافظة شبوة (مع إضافة رمز "سعد الظالمة" = 712)
-    const tribeCodes = {
-      "لقموش": "715",
-      "العوالق": "917",
-      "نعمان": "716",
-      "حمير": "714",
-      "المصعبين": "604",
-      "القراميش": "711",
-      "بلحارث": "501",
-      "بني هلال": "705",
-      "بلعبيد": "717",
-      "سعد الظالمة": "712"
-    };
-  
-    const tribeForm = document.getElementById("tribeForm");
-    const guessBtn = document.getElementById("guessBtn");
-    const resetBtn = document.getElementById("resetBtn");
-    const fullNameInput = document.getElementById("fullName");
-    const governorateSelect = document.getElementById("governorate");
-    const resultDiv = document.getElementById("result");
-    const tribeCodeDiv = document.getElementById("tribeCode");
-  
-    let guessed = false;
-  
-    tribeForm.addEventListener("submit", function(e) {
-      e.preventDefault();
-      if (guessed) return;
-  
-      const fullName = fullNameInput.value.trim();
-      const governorate = governorateSelect.value;
-  
-      if (fullName === "") {
-        resultDiv.textContent = "يرجى إدخال اسمك الثنائي.";
-        tribeCodeDiv.textContent = "";
-        return;
-      }
-      if (!tribes[governorate]) {
-        resultDiv.textContent = "الخدمة متوفرة حالياً لمحافظة شبوة، حضرموت، ومأرب فقط.";
-        tribeCodeDiv.textContent = "";
-        return;
-      }
-      guessBtn.style.display = "none";
-      fullNameInput.disabled = true;
-      governorateSelect.disabled = true;
-      resultDiv.textContent = "جارٍ التخمين...";
-      tribeCodeDiv.textContent = "";
-      
-      setTimeout(function() {
-        const selectedTribes = tribes[governorate];
-        const randomIndex = Math.floor(Math.random() * selectedTribes.length);
-        const tribe = selectedTribes[randomIndex];
-        resultDiv.textContent = "اعتقد بانك تنتمي يا " + fullName + " الى قبيلة " + tribe + " وسبعين نعم يالذيب 🫡🔥.";
-  
-        if (governorate === "محافظة شبوة") {
-          const code = tribeCodes[tribe];
-          tribeCodeDiv.textContent = code ? "رمز قبيلتك هو (" + code + ") 🔥" : "";
-        }
-        guessed = true;
-        resetBtn.style.display = "block";
-      }, 3000);
-    });
-  
-    resetBtn.addEventListener("click", function() {
-      tribeForm.reset();
-      resultDiv.textContent = "";
-      tribeCodeDiv.textContent = "";
-      guessed = false;
-      fullNameInput.disabled = false;
-      governorateSelect.disabled = false;
-      resetBtn.style.display = "none";
-      guessBtn.style.display = "block";
-    });
-  </script>
 </body>
 </html>
